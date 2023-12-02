@@ -11,7 +11,7 @@ int shift_check(char* line, int size, int line_count){
 	char *check_array = (char*) malloc(sizeof(char) * 6);
 	int res = -1;
 	for (size_t i = 3; i <= 5; i++) {
-		memcpy(check_array, line, i);
+		memcpy(check_array, &line[line_count], i);
 		if((res=check_word_num(check_array, i)) > 0){
 			return res;
 		}
@@ -62,23 +62,22 @@ long find_sum(const char* path){
 		int first_digit = 0;
 		int first = 0;
 		int last = 0;
-		int line_count = 0;
 
 		for(int i = 0; i < read; i++){
 
-			if ('0' <= line[0] && line[0] <= '9'){
+			if ('0' <= line[i] && line[i] <= '9'){
 
 				if (first_digit != -1){
-					first = line[0] - '0';
+					first = line[i] - '0';
 					last = first;
 					first_digit = -1;
 				}else{
-					last = line[0] - '0';
+					last = line[i] - '0';
 				}
 
 			}else{
 				int num = 0;
-				if ((num=shift_check(line, read, line_count)) > -1){
+				if ((num=shift_check(line, read, i)) > -1){
 					if (first_digit != -1){
 						first = num;
 						last = first;
@@ -89,8 +88,7 @@ long find_sum(const char* path){
 				}
 
 			}
-
-			memmove(line, &line[1], sizeof(char)*(read - i));
+			
 		}
 		result += (10*first) + last;
 	}
