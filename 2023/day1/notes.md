@@ -1,4 +1,4 @@
-# DAY 1 Notes Trebuchet?!
+# DAY 1: Trebuchet?!
 
 ## Information
 
