@@ -155,6 +155,11 @@ long find_gears(const char* path){
 
 	fseek(f, 0, SEEK_SET);
 	schematic = (char**) malloc(num_of_lines * sizeof(char*));
+	
+	for (int i = 0; i < num_of_lines; i++) {
+		schematic[i] = NULL;
+	}
+
 	num_of_lines = 0;
 	
 	while ((read=getline(&schematic[num_of_lines], &len, f)) != -1) {
@@ -164,6 +169,10 @@ long find_gears(const char* path){
 	for (size_t i = 0; i < num_of_lines; i++) {
 		sum += search_gearline(schematic, i, num_of_lines);
 
+	}
+
+	for (int i = 0; i < num_of_lines; i++) {
+		free(schematic[i]);
 	}
 
 	free(schematic);
@@ -272,6 +281,11 @@ long find_parts(const char* path){
 
 	fseek(f, 0, SEEK_SET);
 	schematic = (char**) malloc(num_of_lines * sizeof(char*));
+
+	for (int i = 0; i < num_of_lines; i++) {
+		schematic[i] = NULL;
+	}
+
 	num_of_lines = 0;
 	
 	while ((read=getline(&schematic[num_of_lines], &len, f)) != -1) {
@@ -280,6 +294,10 @@ long find_parts(const char* path){
 
 	for (size_t i = 0; i < num_of_lines; i++) {
 		sum += traverse_line(schematic, i, num_of_lines);
+	}
+	
+	for (int i = 0; i < num_of_lines; i++) {
+		free(schematic[i]);
 	}
 
 	free(schematic);
