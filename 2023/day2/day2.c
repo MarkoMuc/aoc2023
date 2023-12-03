@@ -71,7 +71,7 @@ long min_bag(const char* path){
 		
 		sum += rgb[0] * rgb[1] * rgb[2];
 	}
-
+	fclose(f);
 	return sum;
 }
 
@@ -148,7 +148,7 @@ long check_limits(const char* path){
 			sum += ID;
 		}
 	}
-
+	fclose(f);
 	return sum;
 }
 
